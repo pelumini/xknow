@@ -8,7 +8,13 @@ export async function POST(req: Request) {
     const { userId } = auth();
     const { title } = await req.json();
 
-    if (!userId || !isTeacher(userId)) {
+    console.log("userid and title", userId + " " + title);
+
+    // if (!userId || !isTeacher(userId)) {
+    //   return new NextResponse("Unauthorized", { status: 401 });
+    // }
+
+    if (!userId) {
       return new NextResponse("Unauthorized", { status: 401 });
     }
 
