@@ -3,10 +3,15 @@ import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 
-const { Video } = new Mux(
-  process.env.MUX_TOKEN_ID!,
-  process.env.MUX_TOKEN_SECRET!
-);
+// const { Video } = new Mux(
+//   process.env.MUX_TOKEN_ID!,
+//   process.env.MUX_TOKEN_SECRET!
+// );
+
+const mux = new Mux({
+  tokenId: process.env["MUX_TOKEN_ID"], // This is the default and can be omitted
+  tokenSecret: process.env["MUX_TOKEN_SECRET"], // This is the default and can be omitted
+});
 
 export async function DELETE(
   req: Request,
@@ -39,11 +44,11 @@ export async function DELETE(
 
     for (const chapter of course.chapters) {
       if (chapter.muxData?.assetId) {
-        await Video.Assets.del(chapter.muxData.assetId);
+        await mux.video.assets.delete(chapter.muxData.assetId);
       }
     }
 
-    const deletedCourse = await db.course.delete({
+    const deletedCourse = await prisma.course.delete({
       where: {
         id: params.courseId,
       },
@@ -69,7 +74,7 @@ export async function PATCH(
       return new NextResponse("Unauthorized", { status: 401 });
     }
 
-    const course = await db.course.update({
+    const course = await prisma.course.update({
       where: {
         id: courseId,
         userId,
