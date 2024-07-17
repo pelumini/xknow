@@ -1,5 +1,4 @@
 import { Category, Chapter, Course } from "@prisma/client";
-
 import { getProgress } from "@/actions/get-progress";
 import prisma from "@/lib/prisma";
 
