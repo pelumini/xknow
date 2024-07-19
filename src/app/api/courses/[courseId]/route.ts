@@ -3,14 +3,9 @@ import { auth } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 
-// const { Video } = new Mux(
-//   process.env.MUX_TOKEN_ID!,
-//   process.env.MUX_TOKEN_SECRET!
-// );
-
 const mux = new Mux({
-  tokenId: process.env["MUX_TOKEN_ID"], // This is the default and can be omitted
-  tokenSecret: process.env["MUX_TOKEN_SECRET"], // This is the default and can be omitted
+  tokenId: process.env["MUX_TOKEN_ID"],
+  tokenSecret: process.env["MUX_TOKEN_SECRET"],
 });
 
 export async function DELETE(
