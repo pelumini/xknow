@@ -10,7 +10,6 @@ const handleAuth = () => {
   const isAuthorized = isTeacher(userId);
 
   if (!userId || !isAuthorized) throw new Error("Unauthorized");
-  // if (!userId) throw new Error("Unauthorized");
   return { userId };
 };
 

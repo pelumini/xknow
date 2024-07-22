@@ -1,5 +1,3 @@
-// NB: To be incorporated in future
-
 import { PrismaClient } from "@prisma/client";
 
 const prismaClientSingleton = () => {
